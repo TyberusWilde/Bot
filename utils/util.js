@@ -18,7 +18,42 @@ async function verify(channel, user, time = 30000) {
     if (no.includes(choice)) return false;
     return false;
   }
-
-  module.exports = {
+  
+  const redMessage = (message, title, description = null) => {
+    message.channel.send({
+      embed: {
+        color: 15158332,
+        title: title,
+        description: description,
+        author: {
+          name: message.client.user.username,
+          icon_url: message.client.user.avatarURL({
+            format: "png",
+            dynamic: true,
+            size: 1024,
+          }),
+        },
+      },
+    });
+  };
+  const blueMessage = (message, title, description = null) => {
+    message.channel.send({
+      embed: {
+        color: 3447003,
+        title: title,
+        description: description,
+        author: {
+          name: message.client.user.username,
+          icon_url: message.client.user.avatarURL({
+            format: "png",
+            dynamic: true,
+            size: 1024,
+          }),
+        },
+      },
+    });
+  };
+    
+  module.exports = {redMessage, blueMessage,
       verify
   }

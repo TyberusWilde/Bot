@@ -2,7 +2,7 @@ const { verify } = require("../../utils/util");
 module.exports = {
     name: "removeAllNickname",
     usage: "removeAllNickname",
-    aliases: [],
+    aliases: ["ran"],
     description: "Remove nickname of every single member of the server",
     ownerOnly: false,
     enabled: true,

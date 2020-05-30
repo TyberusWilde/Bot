@@ -40,14 +40,13 @@ let Colors = {
     WIKIPEDIA: "6b6b6b",
   };
 module.exports = {
-  config: {
     name: "stats",
     usage: "stats",
     aliases: [],
     description: "Show bot statistics",
     ownerOnly: false,
-    enabled: true,
-  },
+enabled: true,
+  
    run: async (client, message, args) => {
     let freeRAM = os.freemem();
     let usedRAM = os.totalmem() - freeRAM;

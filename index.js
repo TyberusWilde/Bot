@@ -40,7 +40,7 @@ client.on("ready", () => {
 })
 
 client.on("message", async message => {
-    const prefix = "A!";
+    const prefix = "T!";
 
     if (message.author.bot) return;
     if (!message.guild) return;
