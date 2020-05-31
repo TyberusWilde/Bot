@@ -21,6 +21,7 @@ module.exports = {
       let i = 0;
       for (const member of message.guild.members.cache.values()) {
         try {
+          if(member.nickname)
           await member.setNickname(" ");
         } catch {
           i++;
