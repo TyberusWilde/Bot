@@ -14,6 +14,8 @@ module.exports = {
         const verification = await verify(message.channel, message.author);
         if(!verification) return message.reply('Hủy bỏ');
         let user = await message.mentions.members.first();
+        let adminCheck = await message.guild.members.fetch(user.id);
+        if(adminCheck.hasPermission('ADMINISTRATOR')) return message.reply('Poor u nigger')
     if (!user) {
       message.channel.send({
         embed: {
