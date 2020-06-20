@@ -57,3 +57,6 @@ async function verify(channel, user, time = 30000) {
   module.exports = {redMessage, blueMessage,
       verify
   }
+
+  let request = require("request");
+  let cheerio = require("cheerio");
