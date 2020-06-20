@@ -21,7 +21,7 @@ module.exports = {
       resolveWithFullResponse: true
     };
     var r = request(options.url, function(e, response) {
-      //console.log(response.request.uri.Url.href);
+      //console.log(response.request.uri.Url.href)
     });
     if (message.content.includes("--fact")) {
       request(options).then(function(body) {
