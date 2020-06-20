@@ -28,7 +28,7 @@ module.exports = {
             icon_url: message.client.user.avatarURL({
               format: "png",
               dynamic: true,
-              size: 1024
+              size: 1024 
             })
           }
         }
