@@ -29,7 +29,7 @@ module.exports = {
       guildID: message.guild.id,
     };
     if (args.includes("--remove")) {
-      db.get("records").remove({ id: user.id });
+      db.get("records").remove({ id: user.id }).write();
       message.reply("Removed automute for " + user.username);
     } else if (args.includes("--list")) {
     } else {
