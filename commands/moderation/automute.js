@@ -1,59 +1,38 @@
 const { RichEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 const { promptMessage } = require("../../functions.js");
-const { verify } = require('../../utils/util.js')
+const { verify } = require("../../utils/util.js");
 const userMap = new Map();
+const low = require("lowdb");
+const FileSync = require("lowdb/adapters/FileSync");
 
+const adapter = new FileSync("db.json");
+const db = low(adapter);
 module.exports = {
-    name: "automute",
-    category: "moderation",
-    description: "mute the member",
-    usage: "<id | mention>",
-    run: async (client, message, args) => {
-
-        /*
-        'id' => {
-            msgCount: o,
-            lastMessage: 'message',
-            timer: fn()
-        }
-        */
-
-    client.on('message', message => {
-        if(message.author.bot) return;
-
-        if(userMap.has(message.author.id)) {
-            const userData = userMap.get(message.author.id);
-            const { lastMessage, timer } = userData;
-            const difference = message.createdTimestamp - lastMessage.createdTimestamp;
-
-            let msgCount = userData.msgCount;
-            if(difference > 2500){
-
-            }
-            ++msgCount;
-            if(parseInt(msgCount) === 5){
-                const role = message.guild.role.cache.get('599909081813352469');
-                message.member.roles.add(role);
-                message.channel.send('You have been muted.');
-            } else {
-                msgCount++;
-                userData.msgCount = msgCount;
-                usersMap.set(message.author.id, userData);
-            }
-
-        }
-        else {
-            let fn = setTimeout(() =>{
-                userMap.delete(message.author.id);
-                console.log('Removed from map.');
-            }, 5000);
-            userMap.set(message.author.id, {
-                msgCount: 1,
-                lastMessage: message,
-                timer: null
-            });
-        }
-    })
+  name: "automute",
+  category: "moderation",
+  description: "mute the member",
+  usage: "<id | mention>",
+  run: async (client, message, args) => {
+    db.defaults({ records: [] }).write();
+    let target = await message.mentions.members.first();
+    let targetId = target ? target.id : message.guild.ownerID;
+    let userData = await message.guild.members.cache.get(targetId);
+    if (!userData)
+      message.reply("Something happened, please tag the user probably");
+    let user = {
+      id: userData.user.id,
+      username: userData.user.username,
+      discriminator: userData.user.discriminator,
+      guildID: message.guild.id,
+    };
+    if (args.includes("--remove")) {
+      db.get("records").remove({ id: user.id });
+      message.reply("Removed automute for " + user.username);
+    } else if (args.includes("--list")) {
+    } else {
+      db.get("records").push({ id: user.id, guildID: user.guildID }).write();
+      message.reply("Added automute for " + user.username);
     }
+  },
 };
