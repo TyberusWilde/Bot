@@ -14,6 +14,8 @@ module.exports = {
   description: "mute the member",
   usage: "<id | mention>",
   run: async (client, message, args) => {
+    if (!message.member.hasPermission("MUTE_MEMBERS"))
+      return message.reply("you gay");
     db.defaults({ records: [] }).write();
     let target = await message.mentions.members.first();
     let targetId = target ? target.id : message.guild.ownerID;
