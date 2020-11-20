@@ -129,7 +129,7 @@ enabled: true,
         true
       )
       .setFooter(
-        `Created by wrose | Last started on ${moment(client.readyAt).format(
+        `Created by Tyberus & Wrose | Last started on ${moment(client.readyAt).format(
           "ddd, DD MMMM YYYY HH:mm [GMT]Z"
         )}`
       );

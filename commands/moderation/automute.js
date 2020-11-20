@@ -28,7 +28,7 @@ module.exports = {
       discriminator: userData.user.discriminator,
       guildID: message.guild.id,
     };
-    if (args.includes("--remove")) {
+    if (args.includes("--remove plz")) {
       db.get("records").remove({ id: user.id }).write();
       message.reply("Removed automute for " + user.username);
     } else if (args.includes("--list")) {
